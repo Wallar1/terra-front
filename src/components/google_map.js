@@ -3,7 +3,8 @@ import {loadScript} from './script_loaders'
 import SiteForm from './site_form'
 
 const axios = require('axios')
-const API_ROOT_URL = 'https://stellar-power-terra-api.herokuapp.com'//'http://localhost:3000'
+const API_ROOT_URL = 'http://localhost:3000'
+//const API_ROOT_URL = 'https://stellar-power-terra-api.herokuapp.com'
 const API_KEY =  process.env.REACT_APP_GOOGLE_API_KEY
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 const map_src = `https://maps.googleapis.com/maps/api/js?libraries=drawing&key=${API_KEY}`
@@ -190,7 +191,9 @@ export default class GoogleMap extends Component {
     });
 
     marker.addListener('click', ()=>{
+      pos = this.pos_fmt(pos)
       let ss = this.merge_site(this.find_site_by_pos(pos))
+      console.log(pos,{...pos,lat:pos.lat - .001})
       map.setOptions({zoom: 19, center: {...pos, lat: pos.lat - .001}}) // on mobile, the form moves the house out of the frame
       this.open_info(marker,ss)
       this.guess_address(pos)
@@ -407,7 +410,7 @@ export default class GoogleMap extends Component {
     if(this.state.unsaved_changes){
       confirm = window.confirm("Are you sure you would like to close the form without saving?")
     }
-    if(confirm){this.setState({form_is_opened: false})}
+    if(confirm){this.setState({form_is_opened: false, unsaved_changes: false})}
   }
 
   render(){
