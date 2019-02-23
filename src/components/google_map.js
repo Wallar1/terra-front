@@ -3,7 +3,7 @@ import {loadScript} from './script_loaders'
 import SiteForm from './site_form'
 
 const axios = require('axios')
-const API_ROOT_URL = 'http://localhost:3000'
+const API_ROOT_URL = 'https://stellar-power-terra-api.herokuapp.com'//'http://localhost:3000'
 const API_KEY =  process.env.REACT_APP_GOOGLE_API_KEY
 const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID
 const map_src = `https://maps.googleapis.com/maps/api/js?libraries=drawing&key=${API_KEY}`
